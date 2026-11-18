@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Conversation Examples Library · TalkAbroad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* TalkAbroad style guide tokens */
+  :root {
+    --blue: #006BFD;          /* Primary 1 */
+    --navy: #122634;          /* Primary 2 */
+    --orange: #D14900;        /* Primary 3 / primary button */
+    --orange-bright: #FB4B00; /* secondary + tertiary buttons */
+    --green: #17AA3D;
+    --yellow: #FCC71D;
+    --n800: #25272A; --n700: #3C3E43; --n600: #686D76; --n500: #80858F;
+    --n400: #9A9EA5; --n300: #D9D9D9; --n200: #F2F2F2; --n100: #FFFFFF;
+    --font-body: "Aeonik", "Aeoniktrial", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-head: "Nib", "Nib trial", Georgia, "Times New Roman", serif;
+    --radius-pill: 200px;
+    --radius-card: 16px;
+    --shadow: 1px 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(18,38,52,.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: var(--font-body); color: var(--navy); background: var(--n100);
+    font-size: 18px; line-height: 1.5; letter-spacing: -0.2px; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header.top { border-bottom: 1px solid var(--n300); background: var(--n100); position: sticky; top: 0; z-index: 10; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+  .logo { height: 26px; width: auto; display: block; }
+  .logo-link { display: block; line-height: 0; }
+  .ui-lang { display: inline-flex; border: 1px solid var(--n300); border-radius: var(--radius-pill); padding: 3px; }
+  .ui-lang button {
+    border: 0; background: transparent; color: var(--n600); font-size: 14px; font-weight: 500;
+    padding: 6px 14px; border-radius: var(--radius-pill); cursor: pointer;
+  }
+  .ui-lang button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+
+  /* Hero */
+  .hero { background: var(--n200); padding: 48px 0 40px; }
+  .eyebrow { color: var(--orange); font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
+  h1 { font-family: var(--font-head); font-weight: 600; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -2px; margin: 0 0 16px; color: var(--n800); }
+  .lede { font-size: 20px; line-height: 1.45; max-width: 760px; margin: 0 0 24px; color: var(--navy); }
+  .notice {
+    display: flex; gap: 14px; align-items: flex-start; background: #fff; border-left: 4px solid var(--blue);
+    border-radius: 8px; padding: 14px 18px; max-width: 860px; font-size: 15px; line-height: 1.5; color: var(--n700);
+    box-shadow: var(--shadow);
+  }
+  .notice svg { flex: none; margin-top: 2px; }
+  .notice strong { color: var(--navy); }
+
+  /* Controls */
+  .controls { padding: 28px 0 8px; display: grid; gap: 18px; }
+  .control-label { font-size: 13px; font-weight: 600; color: var(--n600); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1.5px solid var(--n300); background: #fff; color: var(--navy); font-size: 15px; font-weight: 500;
+    padding: 7px 16px; border-radius: var(--radius-pill); cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .chip:hover { border-color: var(--navy); }
+  .chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .chip .n { opacity: .6; font-weight: 400; margin-left: 4px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; }
+
+  /* Buttons (style guide: pill, primary orange fill / secondary orange outline) */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; border-radius: var(--radius-pill); font-weight: 500; line-height: 1.2; transition: filter .15s, background .15s, color .15s; }
+  .btn-primary { background: var(--orange); color: #fff; border: 0; padding: 10px 26px; font-size: 16px; }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-secondary { background: #fff; color: var(--orange-bright); border: 2px solid var(--orange-bright); padding: 6px 18px; font-size: 14px; }
+  .btn-secondary:hover { background: var(--orange-bright); color: #fff; }
+
+  /* Rubric area nav */
+  .areas { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .area-btn {
+    width: 100%; text-align: left; background: #fff; border: 1.5px solid var(--n300); border-radius: 12px;
+    padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    color: var(--navy); font-size: 15px; font-weight: 500; line-height: 1.25; transition: border-color .15s, box-shadow .15s;
+  }
+  .area-btn:hover { border-color: var(--blue); }
+  .area-btn .count { flex: none; font-size: 13px; font-weight: 600; color: var(--n600); background: var(--n200); border-radius: var(--radius-pill); padding: 2px 9px; }
+  .area-btn[aria-current="true"] { border-color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); background: #F2F7FF; }
+  .area-btn[aria-current="true"] .count { background: var(--blue); color: #fff; }
+  .area-btn[disabled] { opacity: .45; cursor: default; }
+
+  /* Area section */
+  .area-head { margin: 40px 0 20px; padding-top: 28px; border-top: 1px solid var(--n300); }
+  h2 { font-family: var(--font-head); font-weight: 600; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -1px; margin: 0; color: var(--n800); }
+  .area-desc { font-size: 18px; max-width: 760px; margin: 10px 0 14px; }
+  .area-meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 15px; color: var(--n600); }
+
+  /* Cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; padding: 0; margin: 0 0 56px; list-style: none; }
+  .card {
+    background: #fff; border: 1px solid var(--n300); border-radius: var(--radius-card); padding: 18px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 12px; transition: transform .15s, box-shadow .15s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(18,38,52,.10); }
+  .card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .03em; padding: 3px 10px; border-radius: var(--radius-pill); }
+  .badge-lang { background: #E6F0FF; color: var(--blue); }
+  .dur { font-size: 14px; color: var(--n600); display: inline-flex; align-items: center; gap: 5px; }
+  .card h3 { font-family: var(--font-body); font-size: 18px; font-weight: 600; margin: 0; color: var(--n800); }
+  .focus { font-size: 14px; color: var(--n600); margin: -6px 0 0; }
+  .also { font-size: 13px; color: var(--n600); }
+  .also-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag { border: 1px solid var(--n300); background: var(--n200); color: var(--n700); font-size: 12px; padding: 3px 9px; border-radius: var(--radius-pill); cursor: pointer; }
+  .tag:hover { border-color: var(--blue); color: var(--blue); }
+  .card .btn-primary { margin-top: auto; align-self: flex-start; font-size: 15px; padding: 9px 22px; }
+  .empty { background: var(--n200); border-radius: var(--radius-card); padding: 32px; text-align: center; color: var(--n600); margin-bottom: 56px; }
+
+  /* Footer */
+  footer { background: var(--navy); color: #C9D2DA; font-size: 14px; padding: 32px 0; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+  footer strong { color: #fff; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--n800); color: #fff; padding: 10px 18px; border-radius: var(--radius-pill); font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    .wrap { padding: 0 16px; }
+    .hero { padding: 32px 0 28px; }
+    .lede { font-size: 18px; }
+    .areas { grid-template-columns: 1fr 1fr; }
+    .area-btn { font-size: 14px; padding: 10px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="https://www.talkabroad.com" target="_blank" rel="noopener noreferrer" class="logo-link">
+<svg class="logo" role="img" aria-label="TalkAbroad" viewBox="0 0 595 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>TalkAbroad</title>
+<g clip-path="url(#clip0_4_13)">
+<path d="M13.2744 9.35449H28.8916V26.5038H44.5086V42.874H28.8916V72.4957C28.8916 75.6142 29.8018 78.0843 31.6246 79.9016C33.4449 81.7213 35.9192 82.6299 39.0426 82.6299C39.8748 82.6299 40.5507 82.6056 41.0729 82.5516C41.5927 82.5005 42.0611 82.4227 42.4784 82.3181C42.8933 82.2155 43.3105 82.0599 43.7278 81.8502V97.4406C42.9982 97.7523 42.1661 98.0131 41.2291 98.2203C39.4574 98.7393 37.4273 99.0001 35.1384 99.0001C31.5977 99.0001 28.3449 98.4008 25.3777 97.2071C22.4105 96.0134 19.8581 94.2715 17.7254 91.9838C15.5903 89.6991 13.9237 86.9951 12.7279 83.8771C11.5299 80.7591 10.932 77.2267 10.932 73.2755V42.874H0V28.0628H4.68515C10.4098 28.0628 13.2744 25.2056 13.2744 19.4882V9.35449Z" fill="#006BFD"/>
+<path d="M79.6457 25.7241C83.706 25.7241 87.4541 26.426 90.8898 27.8289C94.3257 29.2322 97.2929 31.1808 99.7915 33.6757C102.29 36.1701 104.242 39.1324 105.648 42.5622C107.053 45.9919 107.756 49.7335 107.756 53.7874V98.2203H94.4818L91.3584 91.2047C89.6918 92.6615 87.869 93.9598 85.8924 95.1024C84.1209 96.1423 81.9882 97.051 79.4894 97.8307C76.9907 98.61 74.1796 99.0001 71.0562 99.0001C63.2476 99.0001 57.2596 97.1045 53.0966 93.3094C48.9312 89.5163 46.8498 84.6564 46.8498 78.7322C46.8498 75.1998 47.5525 71.9505 48.9581 68.9882C50.3636 66.0259 52.7305 63.4804 56.0639 61.3489C59.3947 59.2198 63.7942 57.5557 69.2602 56.3596C74.7262 55.166 81.5709 54.5667 89.7967 54.5667C89.7967 50.6179 88.7279 47.551 86.5952 45.3684C84.46 43.1858 81.6222 42.0943 78.0838 42.0943C75.6877 42.0943 73.7892 42.5111 72.3836 43.3415C70.9781 44.1747 69.858 45.0566 69.026 45.992C68.089 47.1371 67.4643 48.4353 67.152 49.8897H49.1924C49.6071 46.5645 50.571 43.4465 52.0815 40.5353C53.5894 37.627 55.6465 35.0786 58.2502 32.896C60.8514 30.7134 63.9503 28.974 67.5424 27.6733C71.1342 26.375 75.1679 25.7242 79.6456 25.7242L79.6457 25.7241ZM74.1797 84.9682C78.8647 84.9682 82.6373 83.5921 85.502 80.837C88.3643 78.0843 89.7967 74.5227 89.7967 70.1575V67.0391C84.4868 67.0391 80.2166 67.273 76.9907 67.741C73.7623 68.2084 71.2368 68.8856 69.4164 69.7674C67.5936 70.6518 66.3711 71.7165 65.7464 72.9637C65.1217 74.2109 64.8094 75.6143 64.8094 77.1732C64.8094 79.1486 65.6927 80.9416 67.4643 82.5516C69.2334 84.1646 71.471 84.9682 74.1796 84.9682H74.1797Z" fill="#006BFD"/>
+<path d="M134.304 98.2203H116.344V0H134.304V98.2203Z" fill="#006BFD"/>
+<path d="M186.619 98.2203L161.632 65.48V98.2203H143.672V0H161.632V56.1261L183.496 26.5038H203.798L178.03 60.803L206.922 98.2203H186.619Z" fill="#006BFD"/>
+<path d="M234.252 25.7241C238.312 25.7241 242.06 26.426 245.496 27.8289C248.932 29.2322 251.899 31.1808 254.398 33.6757C256.896 36.1701 258.849 39.1324 260.254 42.5622C261.66 45.9919 262.362 49.7335 262.362 53.7874V98.2203H249.088L245.965 91.2047C244.298 92.6615 242.475 93.9598 240.499 95.1024C238.727 96.1423 236.594 97.051 234.096 97.8307C231.597 98.61 228.786 99.0001 225.662 99.0001C217.854 99.0001 211.866 97.1045 207.703 93.3094C203.537 89.5163 201.456 84.6564 201.456 78.7322C201.456 75.1998 202.159 71.9505 203.564 68.9882C204.97 66.0259 207.337 63.4804 210.67 61.3489C214.001 59.2198 218.4 57.5557 223.866 56.3596C229.332 55.166 236.177 54.5667 244.403 54.5667C244.403 50.6179 243.334 47.551 241.201 45.3684C239.066 43.1858 236.228 42.0943 232.69 42.0943C230.294 42.0943 228.395 42.5111 226.99 43.3415C225.584 44.1747 224.464 45.0566 223.632 45.992C222.695 47.1371 222.071 48.4353 221.758 49.8897H203.799C204.213 46.5645 205.177 43.4465 206.688 40.5353C208.196 37.627 210.253 35.0786 212.856 32.896C215.458 30.7134 218.557 28.974 222.149 27.6733C225.74 26.375 229.774 25.7242 234.252 25.7242L234.252 25.7241ZM228.786 84.9682C233.471 84.9682 237.243 83.5921 240.108 80.837C242.97 78.0843 244.403 74.5227 244.403 70.1575V67.0391C239.093 67.0391 234.823 67.273 231.597 67.741C228.369 68.2084 225.843 68.8856 224.023 69.7674C222.2 70.6518 220.977 71.7165 220.353 72.9637C219.728 74.2109 219.416 75.6143 219.416 77.1732C219.416 79.1486 220.299 80.9416 222.071 82.5516C223.84 84.1646 226.077 84.9682 228.786 84.9682H228.786Z" fill="#122634"/>
+<path d="M307.65 99C304.527 99 301.716 98.6099 299.217 97.8307C296.718 97.0509 294.583 96.1423 292.814 95.1023C290.73 93.9597 288.91 92.6614 287.348 91.2046L284.225 98.2203H270.95V0H288.91V32.7403C290.367 31.4926 292.033 30.3504 293.907 29.31C295.572 28.4796 297.524 27.6731 299.764 26.8934C302.002 26.1141 304.629 25.724 307.65 25.724C312.126 25.724 316.396 26.6351 320.456 28.4524C324.517 30.2721 328.082 32.8181 331.154 36.0922C334.224 39.3658 336.671 43.2392 338.494 47.707C340.314 52.1773 341.227 57.0615 341.227 62.362C341.227 67.6626 340.314 72.5497 338.494 77.017C336.671 81.4873 334.224 85.3582 331.154 88.6319C328.082 91.906 324.517 94.4544 320.456 96.2716C316.396 98.0914 312.126 99 307.65 99ZM287.348 62.362C287.348 68.2867 289.066 73.0172 292.502 76.5496C295.938 80.0839 300.205 81.8501 305.308 81.8501C310.41 81.8501 314.678 80.0839 318.114 76.5496C321.55 73.0172 323.267 68.2867 323.267 62.362C323.267 56.4373 321.55 51.7093 318.114 48.1745C314.678 44.6425 310.408 42.8739 305.308 42.8739C300.208 42.8739 295.938 44.6426 292.502 48.1745C289.066 51.7093 287.348 56.4379 287.348 62.362Z" fill="#122634"/>
+<path d="M380.268 25.7241C381.1 25.7241 381.83 25.7781 382.454 25.8803C383.079 25.9848 383.65 26.0899 384.172 26.192C384.692 26.2966 385.212 26.4017 385.734 26.5038V45.2127C385.212 45.11 384.641 45.0054 384.016 44.9009C383.494 44.7983 382.845 44.6937 382.064 44.5891C381.283 44.4865 380.424 44.433 379.487 44.433C375.114 44.433 371.547 45.863 368.789 48.7203C366.03 51.5805 364.651 55.3464 364.651 60.0233V98.2203H346.691V26.5039H359.966L363.089 34.2993C364.338 32.7403 365.846 31.337 367.618 30.0898C369.075 28.9472 370.871 27.934 373.006 27.0497C375.139 26.1678 377.559 25.7242 380.268 25.7242L380.268 25.7241Z" fill="#122634"/>
+<path d="M456.792 62.3621C456.792 67.4559 455.829 72.2107 453.903 76.6275C451.976 81.0461 449.375 84.9171 446.095 88.2423C442.815 91.5699 439.014 94.1937 434.694 96.1156C430.373 98.0399 425.766 99.0001 420.873 99.0001C415.978 99.0001 411.371 98.0399 407.052 96.1156C402.731 94.1937 398.931 91.5699 395.652 88.2423C392.372 84.9171 389.769 81.0461 387.843 76.6275C385.916 72.2107 384.954 67.456 384.954 62.3621C384.954 57.2682 385.916 52.5159 387.843 48.0967C389.769 43.6804 392.372 39.8095 395.652 36.4819C398.931 33.1566 402.731 30.5329 407.052 28.6086C411.371 26.6868 415.978 25.7241 420.873 25.7241C425.766 25.7241 430.373 26.6868 434.694 28.6086C439.014 30.5329 442.815 33.1567 446.095 36.4819C449.374 39.8095 451.976 43.6804 453.903 48.0967C455.829 52.5159 456.792 57.2707 456.792 62.3621ZM402.914 62.3621C402.914 68.2867 404.632 73.0172 408.067 76.5497C411.503 80.084 415.771 81.8502 420.873 81.8502C425.973 81.8502 430.244 80.084 433.679 76.5497C437.115 73.0172 438.833 68.2868 438.833 62.3621C438.833 56.4374 437.115 51.7094 433.679 48.1745C430.244 44.6426 425.973 42.874 420.873 42.874C415.771 42.874 411.503 44.6427 408.067 48.1745C404.632 51.7094 402.914 56.4379 402.914 62.3621Z" fill="#122634"/>
+<path d="M491.929 25.7241C495.99 25.7241 499.738 26.426 503.173 27.8289C506.609 29.2322 509.576 31.1808 512.075 33.6757C514.574 36.1701 516.526 39.1324 517.932 42.5622C519.337 45.9919 520.04 49.7335 520.04 53.7874V98.2203H506.765L503.642 91.2047C501.975 92.6615 500.152 93.9598 498.176 95.1024C496.404 96.1423 494.272 97.051 491.773 97.8307C489.274 98.61 486.463 99.0001 483.34 99.0001C475.531 99.0001 469.543 97.1045 465.38 93.3094C461.215 89.5163 459.133 84.6564 459.133 78.7322C459.133 75.1998 459.836 71.9505 461.242 68.9882C462.647 66.0259 465.014 63.4804 468.347 61.3489C471.678 59.2198 476.078 57.5557 481.544 56.3596C487.01 55.166 493.854 54.5667 502.08 54.5667C502.08 50.6179 501.011 47.551 498.879 45.3684C496.744 43.1858 493.906 42.0943 490.367 42.0943C487.971 42.0943 486.073 42.5111 484.667 43.3415C483.262 44.1747 482.142 45.0566 481.31 45.992C480.372 47.1371 479.748 48.4353 479.435 49.8897H461.476C461.891 46.5645 462.855 43.4465 464.365 40.5353C465.873 37.627 467.93 35.0786 470.534 32.896C473.135 30.7134 476.234 28.974 479.826 27.6733C483.418 26.375 487.452 25.7242 491.929 25.7242L491.929 25.7241ZM486.463 84.9682C491.148 84.9682 494.921 83.5921 497.786 80.837C500.648 78.0843 502.08 74.5227 502.08 70.1575V67.0391C496.77 67.0391 492.5 67.273 489.274 67.741C486.046 68.2084 483.52 68.8856 481.7 69.7674C479.877 70.6518 478.655 71.7165 478.03 72.9637C477.405 74.2109 477.093 75.6143 477.093 77.1732C477.093 79.1486 477.976 80.9416 479.748 82.5516C481.517 84.1646 483.755 84.9682 486.463 84.9682H486.463Z" fill="#122634"/>
+<path d="M558.3 99C553.822 99 549.555 98.0914 545.494 96.2716C541.434 94.4544 537.866 91.906 534.796 88.6319C531.724 85.3582 529.277 81.4873 527.456 77.017C525.634 72.5497 524.723 67.6626 524.723 62.362C524.723 57.0615 525.634 52.1773 527.456 47.707C529.277 43.2392 531.724 39.3658 534.796 36.0922C537.866 32.8181 541.434 30.2721 545.494 28.4524C549.555 26.6351 553.822 25.724 558.3 25.724C561.214 25.724 563.817 26.1142 566.109 26.8934C568.398 27.6731 570.376 28.4796 572.043 29.31C573.917 30.3504 575.581 31.4926 577.04 32.7403V0H595V98.2203H581.726L578.602 91.2046C576.936 92.6614 575.113 93.9597 573.136 95.1023C571.365 96.1423 569.232 97.0509 566.733 97.8307C564.234 98.6099 561.424 99 558.3 99ZM578.602 62.362C578.602 56.4379 576.884 51.7093 573.449 48.1745C570.013 44.6425 565.743 42.8739 560.643 42.8739C555.54 42.8739 551.272 44.6426 547.837 48.1745C544.401 51.7093 542.683 56.4379 542.683 62.362C542.683 68.2862 544.401 73.0172 547.837 76.5496C551.272 80.0839 555.54 81.8501 560.643 81.8501C565.743 81.8501 570.013 80.0839 573.449 76.5496C576.884 73.0172 578.602 68.2867 578.602 62.362Z" fill="#122634"/>
+</g>
+<defs>
+<clipPath id="clip0_4_13">
+<rect width="595" height="99" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+    </a>
+    <div class="ui-lang" role="group" aria-label="Page language / Idioma de la página">
+      <button type="button" data-ui="en" aria-pressed="true">English</button>
+      <button type="button" data-ui="es" aria-pressed="false">Español</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-t="eyebrow"></p>
+      <h1 data-t="title"></h1>
+      <p class="lede" data-t="lede"></p>
+      <div class="notice" role="note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2" stroke="#006BFD" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#006BFD" stroke-width="2"/></svg>
+        <div data-t="notice"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="controls" aria-label="Filters">
+      <div>
+        <p class="control-label" id="lang-label" data-t="langLabel"></p>
+        <div class="chips" id="langs" role="group" aria-labelledby="lang-label"></div>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-secondary" id="copy-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-t="copyLink"></span>
+        </button>
+      </div>
+      <div>
+        <p class="control-label" id="area-label" data-t="areaLabel"></p>
+        <ul class="areas" id="areas" aria-labelledby="area-label"></ul>
+      </div>
+    </section>
+
+    <section id="area-section" aria-live="polite">
+      <div class="area-head">
+        <h2 id="area-title"></h2>
+        <p class="area-desc" id="area-desc"></p>
+        <div class="area-meta" id="area-meta"></div>
+      </div>
+      <ul class="grid" id="grid"></ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong>TalkAbroad</strong> · <span data-t="footer"></span></div>
+    <div data-t="footer2"></div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* =====================================================================
+   EDIT HERE: rubric areas (order = rubric order) and short descriptions.
+   Index numbers (0-9) match the clip data below. Do not reorder.
+   ===================================================================== */
+const AREAS = [
+  { slug: "ethics-professionalism", en: "Ethics and Professionalism", es: "Ética y Profesionalismo",
+    dEn: "Being on time, prepared, respectful and professional from the first hello to the last goodbye.",
+    dEs: "Puntualidad, preparación y un trato respetuoso y profesional desde el saludo hasta la despedida." },
+  { slug: "assignment", en: "Assignment", es: "Tarea",
+    dEn: "Covering the student's assignment clearly and keeping the conversation on task.",
+    dEs: "Cubrir la tarea del estudiante con claridad y mantener la conversación enfocada en ella." },
+  { slug: "appropriate-topics", en: "Appropriate Topics", es: "Temas Apropiados",
+    dEn: "Keeping the conversation on suitable topics that are comfortable for the student.",
+    dEs: "Mantener la conversación en temas adecuados y cómodos para el estudiante." },
+  { slug: "target-language", en: "Target Language", es: "Idioma Objetivo",
+    dEn: "Staying in the target language throughout the conversation.",
+    dEs: "Mantenerse en el idioma objetivo durante toda la conversación." },
+  { slug: "engaging-responses", en: "Engaging Responses (Answering Questions)", es: "Respuestas Alentadoras (Responder Preguntas)",
+    shortEn: "Engaging Responses", shortEs: "Respuestas Alentadoras",
+    dEn: "Answering the student's questions with full, interesting answers that keep the conversation going.",
+    dEs: "Responder las preguntas del estudiante con respuestas completas e interesantes que mantienen viva la conversación." },
+  { slug: "conversational-prompts", en: "Conversational Prompts (Asking Questions)", es: "Estímulos Conversacionales (Hacer Preguntas)",
+    shortEn: "Conversational Prompts", shortEs: "Estímulos Conversacionales",
+    dEn: "Asking open, interesting questions that get the student talking.",
+    dEs: "Hacer preguntas abiertas e interesantes que animan al estudiante a hablar." },
+  { slug: "tailored-communication", en: "Tailored Communication (Adaptation to the Level)", es: "Comunicación Personalizada (Adaptación al Nivel)",
+    shortEn: "Tailored Communication", shortEs: "Comunicación Personalizada",
+    dEn: "Adjusting speed, vocabulary and complexity to the student's level.",
+    dEs: "Ajustar la velocidad, el vocabulario y la complejidad al nivel del estudiante." },
+  { slug: "speaking-circumlocution", en: "Speaking Circumlocution", es: "Circunlocución al Hablar",
+    dEn: "Explaining words the student doesn't know through description, examples or gestures instead of translating.",
+    dEs: "Explicar palabras que el estudiante no conoce con descripciones, ejemplos o gestos en lugar de traducir." },
+  { slug: "listening-circumlocution", en: "Listening Circumlocution", es: "Circunlocución al Escuchar",
+    dEn: "Helping the student get their meaning across when they're missing a word.",
+    dEs: "Ayudar al estudiante a expresar su idea cuando le falta una palabra." },
+  { slug: "listening-speaking-ratio", en: "Listening/Speaking Ratio", es: "Balance al Escuchar y Hablar",
+    dEn: "Letting the student do most of the talking.",
+    dEs: "Dejar que el estudiante hable la mayor parte del tiempo." },
+];
+
+const LANGS = {
+  ES:  { en: "Spanish",  es: "Español" },
+  FR:  { en: "French",   es: "Francés" },
+  DE:  { en: "German",   es: "Alemán" },
+  IT:  { en: "Italian",  es: "Italiano" },
+  ZH:  { en: "Mandarin", es: "Mandarín" },
+  JA:  { en: "Japanese", es: "Japonés" },
+  AR:  { en: "Arabic",   es: "Árabe" },
+  ASL: { en: "ASL",      es: "ASL" },
+  EN:  { en: "English",  es: "Inglés" },
+};
+
+const T = {
+  en: {
+    eyebrow: "Conversation Partner training",
+    title: "Conversation Examples Library",
+    lede: "Short clips of real conversations where a Conversation Partner did an excellent job in one area of the evaluation rubric. Pick a rubric area, choose your language, and watch how other partners handle it.",
+    notice: "<strong>Clips open in Google Drive.</strong> Sign in with the Google account you gave TalkAbroad. If Drive asks you to request access, contact your trainer. These clips are for your training only: please don't download, record or share them.",
+    langLabel: "Language",
+    all: "All languages",
+    areaLabel: "Rubric area",
+    copyLink: "Copy link to this view",
+    copied: "Link copied",
+    watch: "Watch clip",
+    example: "Example",
+    min: "min",
+    focusOnly: "Focused on this area",
+    also: "Also a good example of:",
+    clips: n => n === 1 ? "1 clip" : `${n} clips`,
+    inLang: l => ` in ${l}`,
+    empty: "No clips for this combination yet. Try another language.",
+    footer: "For TalkAbroad Conversation Partners only.",
+    footer2: "Please don't share this page or its links.",
+  },
+  es: {
+    eyebrow: "Capacitación para Conversation Partners",
+    title: "Biblioteca de Ejemplos de Conversación",
+    lede: "Fragmentos cortos de conversaciones reales en las que un Conversation Partner hizo un excelente trabajo en un área de la rúbrica de evaluación. Elige un área de la rúbrica y tu idioma, y observa cómo lo hacen otros partners.",
+    notice: "<strong>Los clips se abren en Google Drive.</strong> Inicia sesión con la cuenta de Google que le diste a TalkAbroad. Si Drive te pide solicitar acceso, contacta a tu capacitador. Estos clips son solo para tu capacitación: por favor no los descargues, grabes ni compartas.",
+    langLabel: "Idioma",
+    all: "Todos los idiomas",
+    areaLabel: "Área de la rúbrica",
+    copyLink: "Copiar enlace a esta vista",
+    copied: "Enlace copiado",
+    watch: "Ver clip",
+    example: "Ejemplo",
+    min: "min",
+    focusOnly: "Enfocado en esta área",
+    also: "También es buen ejemplo de:",
+    clips: n => n === 1 ? "1 clip" : `${n} clips`,
+    inLang: l => ` en ${l}`,
+    empty: "Todavía no hay clips para esta combinación. Prueba otro idioma.",
+    footer: "Solo para Conversation Partners de TalkAbroad.",
+    footer2: "Por favor no compartas esta página ni sus enlaces.",
+  },
+};
+
+/* Clip data: [Google Drive file ID, language, rubric areas (digits = AREAS index), (unused), minutes].
+   Generated from the private CP Training Library index. Contains no names, dates or booking details. */
+const CLIPS = [["1Bf9zDbd64sUYGdQz4rDvKg44k6jk61pp","EN","2",0,3.3],["1WUE1LU0VlcmI2aCmqDdMW5PN2ZUMqDoy","EN","78",0,1.2],["1MrZpcPjSGgJj5JioXienlHwN6p1CKhEt","EN","37",0,2.3],["1rPn8l8euOV4uq-woJ32OY1bvNggnGQaq","EN","8",0,1.2],["1Zy2OAoeN-9XG1poY0OQW89io0CSIFoGU","JA","67",0,1.9],["1jSkOphJq3AS5dyfe71hhlfHthxuom9Oq","JA","3",1,1.4],["1pSKQMgWSGv0AAzAexqleQH7cH7l5XCKk","ZH","1239",0,1.4],["14-TySpHhx3xuNbOwQBO6j1Jm7coKBUcK","ZH","1239",0,0.6],["1esUC0uO0LOVwWZaCKXxXFvw8W7D6TB-v","ZH","1234569",0,0.8],["1CJeLWNedRMcbEPLUs5BnkF2QbuiPkuJ3","ZH","1234569",0,0.9],["1-H-RNx12NpmkAZtzq7d7NCe7ATlUBgRA","ZH","2369",0,1],["16J0IpY1kM7qlwIxThosKt4LZXFgg3nXF","ZH","4569",0,2.5],["1LfgFK-qfLad8Xcb13okwY0eiJT7aj2xe","ZH","4569",0,1.3],["1jPXO3ObBgjATRe1gmrsEJbHj07o5IXTW","ZH","4569",0,0.9],["1UgOaG-6N7kzKKD6JGnXTxiRYblmds3zY","ZH","2469",0,2.1],["1THmWKgJ4Vpi1JaTf2K5U4-hMKACZidBV","ZH","2469",0,1],["1FW3_RaTq6sVLOIjUxawpNRNkdJPdzlhz","ZH","349",0,1.4],["1Y8eQJopvJ6RjcFZ3IvZYbsCQYGYrT3lV","ZH","349",0,2.2],["13EjuqlCGeCkZUZWmThnVDUkTn_u-9zG3","ZH","349",0,1.6],["1OvcHgQLYwd1gi9wLLqhz-p6pBd09N2bQ","ZH","03468",0,0.9],["1CqZsTCUjn7ssxiTRYSno69Miy2EAH6Nh","ZH","03468",0,1.1],["1IEnduoWzEBZG10jyho7K8HnrVvvST4Mw","ZH","03468",0,0.8],["13ocTuFIHr28chbhnLXRCsowKvAbzHqQ_","ZH","03468",0,1.8],["1KlSEi3zaTZPoPMCe17S-7q6qe5BBQfAb","ZH","467",0,1.2],["1CLLsUE00uS0gThlf71KvXPMGDbvx_i7N","ZH","467",0,1.4],["1qiSFccERGe-hAJ3x0lC_OmSZ2XW78Nrp","ZH","567",0,3.5],["1v2C0CTbCadLyO5So8ZN0Pp1ie4kfK8YW","ZH","157",0,2.4],["1gPYmk2OJypBDsLqJ9tiHiPsfz0hC8rHC","ZH","7",0,2.2],["1x9yg3rJGrxNsYNobUpyXMewonr6p97YM","ZH","46",0,3.9],["1Jb6QqF2p-QTW8jE2YDcXEtWb8w4oMrTI","ZH","356",0,0.9],["1UnLViBZg9Xk5X5x0X0_vzxL6kn74HrAq","ZH","356",0,0.6],["15ZYndTCksC5IpkqxsSBvZdJOCExsxgVn","ZH","356",0,0.9],["1MoYYLTAe1z4C7eytlSBkYdnCLyib14qu","ZH","26",0,6.2],["1jlCq5F3xlomva74mNU99Ka8mvfq2ieq_","ZH","0235",0,0.5],["1vEnhWzwUoPLEkIiVdnXqhdqyOHTil6al","ZH","0235",0,1.5],["1vcc8UyD37iPu8Vl4Zp7XgRF9QF_R-VF4","ZH","0235",0,1.8],["1JKd-Z02W6lXXNT63c31nN3eaG6zMYoSa","ZH","3",0,2],["1uAvXbF4USHyIcRLUEegLMjlKvT80cag3","ZH","3",1,3.5],["1TUsTxHm7Jm4YpLEj8jhX9Krqws8iHYJw","ZH","3",1,2.4],["1OwRzRQPE7YITAm-WfwHrA2-d81vgXlcA","ZH","3",1,6.2],["1sqgmqH7m7xmrsiywlMElVoom5B_8OGqN","ZH","2",0,1.8],["1Fi1plNf1OaS_EQQsJsTiXn_DCChkwmar","DE","0256",0,6],["1XybOlhF18qcsy_mP-e3yLyQDGfOQ5ud_","DE","0245679",0,3],["1hbRoj31mDo2gRpb2K6h_j9v2YmT4zlSe","DE","012345789",0,3.8],["1A5cE2wBaOxqTk-Fn-Wz38EFymGv_mHnW","DE","6789",0,2.1],["1Ics8psdZ09hQiT0sdeniHLN1pRCBIq4J","DE","378",0,1.9],["1yJ0vTVkBSfr8Lx4IGaI19lGbfqAfR1wD","DE","78",0,1],["14TZ_ze2RaRDRwLecus2-ekMdzAtk8ina","DE","7",0,2.2],["1cP-9j-OUY8_ng4Q5m0a23IozwPs2EfRJ","DE","7",0,1.2],["1eJrk62PqBGcsrErIR4-ZKEcPc28_bpcU","DE","7",0,1.6],["1Zh2mWDNIHQJrTQf49sqJaN-EOCv4IYAo","DE","7",0,0.9],["1muSHupWslEC21W3I6PMFG2G0QlZapOSP","DE","567",0,2.8],["1OoVqlyIfJeFxvm6hkQAkDAChzqZUNkLb","DE","7",0,1.1],["1i7uqI4yMiVSPlu6o7gVSNewoESdoRjyo","DE","47",0,0.9],["1pjerNTWtrdewxQNNtAYIRnNlKk6h2l2p","DE","7",0,1.9],["1w4fazcSKmc17NVhJQ1dDrxEl_JHt20YP","DE","7",0,1],["1Adz4DyUxEObhArkgBJKCn15BlBpTN9iE","DE","7",0,0.5],["1h_zJfl3ieXW7ZJ2Vu6r3uP87AF4fW-7H","DE","7",0,1.1],["1L4GESdKPR6x1F9u6hKZFkLzftUr-wzFq","DE","7",0,0.8],["1i1_azt9o01zJmkP5qimGO3i5Pryxn5DV","DE","7",0,2.8],["1z7gYmC3Q_3jcjvWOyznc3eew0o4I9V7z","DE","7",0,1.9],["1oHzCHA1EgcoQHN1d0pnoWbBXr1wVr86h","DE","7",0,1.3],["15mBfdv2jNaKSiAQjPlYJs7jgl8d_iAxe","DE","5",0,1.6],["1-yQUMdBdV9yy-JYb0heVSlZha79dng3E","DE","3",1,0.9],["1sVGtE-aCtddC3FxhgLt6-aRL3Glxkf_k","DE","1",0,1.4],["1qhEKZ3_rKcEPMVQ7ekK6oKRAIurp022M","DE","1",1,0.4],["1LxBu1g1sevI7euGv_2jVpfZwdW-kmV8v","DE","1",1,6],["108qQB5jbckDk82lVnuFOl4HMoNLc8tl5","DE","1",1,3],["1UKZBtZw2XCX2CzfysCL7_2mJjUyGPN1P","DE","1",1,0.6],["1XUwApjsLr84v7qQ72EeGmuqjoNjP3-q-","DE","1",1,2.8],["1RtVukz5SoyuIMrI1WIP3BwI_ejCOD-pT","DE","1",1,0.8],["1zACspL18iRPTDvLWN3qJxXR4PlHPz7wM","AR","9",0,1.6],["16YocfRLfjPY_4B3OYSWaH9h1txEIVVrr","AR","7",0,0.7],["1MZSnp_gyP2Opid8n-UvyUPdwcFQIAJzv","AR","7",0,1.1],["1i-oSXvz1iOAewkq5ncnychhKoZqEAjTK","AR","7",0,3.4],["1o48z5xZycldi1j-vE3UVlPqheBuI90u5","AR","1",1,5.9],["1mRU2Y5XedgKCbzvbAZau6sfs-NRLfkts","AR","0",0,0.5],["1zIKDfg96BFMlzN0bkEWwJ_a8Zf8g14Wf","FR","0678",0,1.9],["11aI7lO569HxxWkisMZRKD_VkkIy68tBC","FR","0579",0,2.5],["1yqdgp-QSthLRtXugJJEYqlTqX9h9WVBl","FR","46789",0,2.1],["1sF5fIU_NiTJG5pi8Ez9o25aozqTzT_fN","FR","056",0,1.8],["1Oo7HvbQYVV-Fvh7bvaVLswmU_WDX1-p_","FR","7",0,1.7],["1XQ5cAvssDphYfOd-ShI7XD52MhXxP95a","FR","01569",0,6.8],["1AkVSvX2W4cgWbUxv7Bc1IEzR_DXDsJg0","FR","04569",0,6.8],["1H2xZ3G78QYlzGLjCqFUe6pTMzFcBWDLx","FR","09",0,4.4],["1Ws53LS5tz4bKKuV-nG3JkIePrxGQzx-E","FR","0568",0,1.8],["1Cu_fYXidK8X4GI1NXp1-9OfKScoh7ldz","FR","01345678",0,4.3],["1i4BK2Lu1DzcZrtNCgwWYenVwGBZWIKO6","FR","045678",0,2.7],["1A-Z5KyHZUH-QQgiHz5BsOdivKukVFVRN","FR","7",0,1.7],["1rxEODldLDCH-Ze4AtBVYG2roY6K3jjWy","FR","67",0,3.9],["1lSbrnj9Rp-B6JPYN6MgPIevDav2v2DTJ","FR","7",0,0.8],["1V9CNfsQUZHkfxvXBtHHwKGRWJTMNLbpX","FR","067",0,2.6],["1xDnRkOqK7XhRFi3sa34oKVVGzs91uqUa","FR","7",0,1.3],["1D9NPW8-pXczMzg7pC8aOCnxjJcfn6lUz","FR","6",0,2.3],["1i62GFzZGq5hNiCEV0mvYnSprNxqcKhBW","FR","6",0,0.8],["1VmAIyDibKEAcjeEAW1xFX1g9fZ6ZZuK8","FR","06",0,2.9],["1Kt5b05z79fI_GRroa1BbaYehf2ZoZ-ei","FR","6",0,2.5],["1RxcGtsrVCSaEcK46-JV6bQcjX2nGC4a3","FR","0456",0,6.9],["1uQHEc0SYOJ2x5b5IuD83iFd4apml5ZyO","FR","0146",0,2.7],["1MYU3zpMF2czJ3DxG8U2pkG1NaMYxXZun","FR","45",0,5],["1oNeFhVQMttisAS1yzDBXWxWI_a2aQ5LE","FR","3",1,7],["1FqF3Y4xKRPTNxQJ-k30Z_ZNlwVkg-ghj","FR","3",1,1.7],["1rBPOfqTd7dVTe3ZDDe_nh7ra4e54dZVX","FR","1",1,6.8],["1l0Dzr3Wr0SJRNsLXqKT9j0moXYyXFf7s","FR","1",1,1.9],["174CAOzSnP7Hc3F7Y0V8R0knKK1UiyYov","FR","1",1,6.9],["1RkL_25uPh9bEia6c5C_X1qg6aKYhbClc","FR","0",0,2.1],["1YZRvFrWJkp9b5P7aDiPPtLoeo3eHbz9B","FR","0",0,2.1],["1djjuRQUOnrepCr7gNoI8heucaeXTB7Ze","FR","0",0,0.5],["1yjmIGqNzelxA7kqGYuOY94tvPwyiWCU7","FR","0",0,1.1],["11ifemlQCHMWuklg9QXpgzcE1i3TvnUaZ","ASL","1478",0,3],["1kQYTFLRH9M63-2z7gC4AcTvftzqCKkbg","ASL","039",0,1],["1lpENsB-wAZiP8T276NfwNNEDCMEeibLG","ASL","134",0,2.7],["1a4ZBb1KvyfyYAZXSzKuZDI9FF1cht0gF","ASL","0123456789",0,2.8],["1n8FHFAPUhADqnAh3zNjUVfJxbk_LZ9Xv","ASL","13456789",0,4.1],["1Sg2L2ddDU5CBvHivQNwduoW19P2T5aZR","ASL","0234689",0,9.9],["1samam64LKnXh2cMHUKVUX6Y2lYW63h67","ASL","9",0,1.7],["1Av4rOuJFHM-70bPq8jNG1CPoKYvKet6s","ASL","29",0,4.2],["114GJBWwGKLd4K7f_H2CUi96kzSQ81CRZ","ASL","1459",0,2.4],["1zLi6Fjg6jcUuyaMiSwUGQtuZ4THqq2gZ","ASL","0123456789",0,4.7],["11BmyTb5Ii8Eg3VetgXPaAqvnvAkgMec_","ASL","9",0,2.1],["13TeCEeZnSwuxum3T4sSPkBciTlzhKBWC","ASL","7",0,1.1],["1v7TeJivH1LryQrXB9mqRoXJ4v8cnbiTP","ASL","6",0,0.5],["11uklNqQvPlkfSvr6TukuVE81NEdVHpcS","ASL","3",1,0.5],["1lxqTMrl1C-BwWfgXrRwfAsJY7FS4X4AR","ASL","3",1,4.2],["1EGAawJYogD0-7lmjdHHrbmQeyVG7tQkg","ASL","3",1,1.7],["1U-FGw3eevW3Hqip0eZsyLPHW1BRqVrW8","ASL","2",0,1.8],["1HthiXerLBcfcdKPcP9XeUjMaqM5GuY2Z","ASL","1",0,2.3],["16VaJB_QofbImVn38M_nFAInP-PKrmR00","ASL","1",1,4.2],["1tviUyEKrm635SEKmX57r8gHhYqTGOXzv","ASL","1",1,1.7],["1w_Y_v-2Diq5C50pan-g4CfAM9cK2SwDE","ASL","1",1,7],["1pXdJVQNrigWX8CfX-bX3eB-EHGEDGL62","ASL","1",1,1.5],["1PH7di9XBr9PcZF5VaGwdq10QB2Ot9cOv","IT","15",0,2.1],["1E9zwSLutL-926r4L_lBsS4UZdzizT8Z8","IT","69",0,3.6],["1XFEJTvJ-Uyu6cBXQeUy8Y9SWRVOUTool","IT","69",0,2.2],["1EuWhfKTnc_RUhk2PpX9NEWkqgZID7EtU","IT","59",0,2.9],["1po08-u400JiwQJst69ScltInvvVSDHKL","IT","9",0,3.4],["1kpHm0FtjHFhF3V1SaZx_fWC_5gtXGZyS","IT","8",0,1.4],["14eXigvfltID6Z-sa2IMWCdch6eWg5jzG","IT","8",0,0.7],["1iXqATm1fGlHCsci-y4w2UVnwXDtyLvv_","IT","67",0,1.7],["15qTINsqFOfW9VzA3NNoBqSSwVxdJpj8_","IT","017",0,2.4],["1_yA2isb0R5S-NTZ_AB30ZAYvR3Uehdwt","IT","167",0,2.9],["1fCJ3FgpywXHEnNuE0ndzw87kWN8w4fGq","IT","67",0,4.5],["1cmF9llz1h0SP8P0cch2Iae4h8VxTt4C6","IT","67",0,1],["1_zXlLfcxhH9FFXR9nGWfiY0TegZWwrvw","IT","7",0,1.1],["1TgYQdt6O-aRWZlQZs0Pc4X_Kht-i-ur6","IT","7",0,0.8],["141kBYFGMiq9650KJ17B6ITGxhxDCmfwB","IT","04",0,1.9],["1vwPT9fYgwWYsX1E6P2fSdGS6Y509GOcs","IT","14",0,2.9],["1ow-khM9TR0U6oxm7bLeQn-s5LFVuf0XH","IT","5",0,1.9],["16KVqQSt_QdMxvj1ZkGlmG4jrmhFcNVmM","IT","125",0,2.3],["1GGNYz9oWZGOB_3Amofgg6FijwlkYgRet","IT","3",0,1.3],["1hfDltdmvnBsAb95rKSjwvdw6jM7ExTJa","IT","3",0,1.8],["1U2Ptx5fBLILJ2X2qYvPASliTEuzvyJLY","IT","3",1,2.4],["1Oywi5sSKI-Hh36BiRbXCQ2q9LFx7KPDO","IT","3",1,2.9],["1a1BgqWpLELvCQg6BY6cgX6AHWktjkWJX","IT","3",1,4.5],["1eDfMvX_fs-RttZDWO0KmHAxCEB8ZY9fa","IT","3",1,2.5],["1ExJZ0ZkVd3phFSLQgASEatTSDABsZwQl","IT","2",0,3.5],["11VuPfyVTpUXb8cPc1ylrNSmcTEnCYu-O","IT","2",0,2],["1JhMBm6J_bOt0mndtxiSgmwDSXB0I_LG5","IT","1",0,1.7],["1k-9-7gweb0whexd5bMJWoFv1Pe9eNJb7","IT","1",1,0.8],["1IX0o2mEKI2cp0SSmdU5bvKuVfoGCI76C","IT","1",1,1.9],["1DbbpcJGEp9gtP_VnXHOQst0PzB00lVW2","IT","1",1,3.5],["1UnMHN1gpyonMsTn7VyGNAPs7BWTZ2-Hl","IT","1",1,1.6],["1ZU0C-zWGEqQzXHPzq36wsarvGvSnZJZg","ES","0459",0,1.3],["1jppnuV2tmBOY4aQQwCcdpIXb18h0EHpx","ES","569",0,1.7],["1vLicBEo9bBvf3KPC1sZ0-jjRrYBfUSlI","ES","0123456789",0,1.8],["12rnlYd8HOba_W_E74gj5NlFUoXdYkMKz","ES","014569",0,5],["1EbVvUxkA35WrcV87Fy1lzV_TZMJYjepx","ES","59",0,1.6],["1GwjWaYas3m_VcR_Znu7i7aNf2pXQzQFE","ES","19",0,0.4],["1glmwnvQ0ue4eib54ErNGNiHQ3EihkFFs","ES","9",0,0.6],["1eKQ791UAN22u0q0HjSSDyx4B_1iB6faF","ES","01469",0,6],["1318ehFZP8bNLgP2NYhD_RD5EhgpZ3wQP","ES","159",0,6.6],["1rUWTKAtAb8eCLG8zJX94WG1VEjp_6SvK","ES","9",0,9.3],["1lO6OaBW2I-1XKoI_B0Wv2yoWK7iftEKp","ES","9",0,1.4],["1UkGouCVrwbJM7jLYcEL-XJvcnR6V1sne","ES","8",0,0.8],["1lslH3hTVOGkb-3MyYzcuGWO7AI-IsuHJ","ES","03468",0,3.8],["1Chiox4DaE5SceEN0ZU_BTH9fFwUcKSem","ES","68",0,1.4],["1Y4WD6lt7kAiWxo94AhD96pM0kOai12GD","ES","03467",0,2],["1xdteW-VzDBnxJsSg-_w-XDyEUEIOMbq0","ES","67",0,1.2],["17ELN4bIRzYwYtTF4CFc8tigOxcOdnYRv","ES","01467",0,1.5],["1-MF1MT4TOQGMt2qMzBdKU12QhTVvPpnR","ES","34567",0,2.5],["1AszL6qjgzBFjZ2mDaFH3WZlXP5ptrtc2","ES","067",0,1.2],["1n-q5uwQPdxR8xgCs1aCdMuDX9CLgVDEA","ES","0467",0,4.1],["1bTKTh35T4ilgBmfcADwqiWxTGCKTuajY","ES","01367",0,1.6],["1bbI8K9xRGLVMKr2BapO9MpDJ7-qYkVfq","ES","037",0,0.7],["1EOGUFJ3sEqLjVl2E4byMeBVHce5O3dQO","ES","01467",0,2.4],["15Ivx3NLsjh3FT6IHAFHb_hC1YRWwhzvn","ES","7",0,1.2],["1yWdFo3hLQ9lJKlZjzV695Q3Yf-vgS_kJ","ES","367",0,1.5],["1AtqFVigcnL7XmZDQcAGLZdvxqk0iG4SY","ES","7",0,0.8],["1pP8jxns4JbU1_0ezRRFYp7SEtOu799BN","ES","47",0,1.6],["1NklcJtPzHyzjivPr8xT4U2T1o91G_t5i","ES","67",0,1.3],["1bE-hAFz911xembdClsuDWL4YNlgown5b","ES","267",0,2.1],["12H2rdARyK235ap_aVRwG9Z865OLCqe7w","ES","67",0,0.7],["1MSU5mhXLjNIFplHLXD91yoBVSLih5AdB","ES","067",0,0.5],["1F3qG-Owa0p8bbA-J2S15rykdyIngQsuY","ES","67",0,0.7],["10NqChNg4Ov6SUBl_3yC9mIlyTw0oA6fy","ES","67",0,1],["1A2-7trHCpAUH8la3Gsmg6GpJx7I6m_6L","ES","04567",0,3.2],["1DAbTqMb3afoKOdvYDuiqXkM6LhqVOSnm","ES","67",0,1.6],["1dSaEcFjulM4dOI4vYtKtI4SL7v8-eCc1","ES","7",0,0.9],["1yTGSp_xRU1Ms0uF1t_lTkrR4vlbPmyMT","ES","7",0,1.1],["1eM5Rns_YQeQRks0Y7PcmhJwpJ3vGH4yK","ES","7",0,0.3],["1oBfuy7lF7c0D8ZjYvxc16CA0_vzvI18C","ES","7",0,0.5],["1-EgAf2DeU1pUL1GZxU3mnpEe5xzkbFOX","ES","7",0,0.3],["1zMuPVaoUWfEzjqR-EQQzIn47UUtgjtMC","ES","7",0,0.4],["16kIgn1WwPJJ9GKdfoKUCEqq6hNrsA8eU","ES","16",0,1.7],["1zb09umSN5t0KDwR7SoTtwrjp9-yBv6Pp","ES","6",0,1.1],["10aBvIu7PjIcWU7L1IEkU3I3PIFVsM3N9","ES","156",0,2.9],["1u-6VM5DjfsNH8mn19LtBCqcXIDh6xD1s","ES","456",0,4.2],["1OomW9YBspSb7gzxTw8-iw_4D-t4vOchx","ES","6",0,1.3],["1eFXZG7xFiQWc6-urSqy7hDjY2CG9tZxy","ES","6",0,0.2],["1QAaiixIgnW_xT3bKPRq3lDcXLcrZLM-g","ES","6",0,0.3],["1SFkBj8HPVUCM5pOiQ341UNPSZzC_t24r","ES","6",0,0.5],["19M7MK3NoWpvSGosoNXDv1EP0CRZeT8tr","ES","6",0,1.7],["1SqtnNu1WMLJQRWij8FdoW5JkVpIlxkzP","ES","6",0,3.1],["1X4zWFj4_T-kfqzggsVGOIQ8_aHHIWW2P","ES","6",0,2.8],["184z02IISaMrwzjSXRpQbXX3QJRTVpira","ES","6",0,2.7],["1pmfkhNygXTxWlYUXx-LI6zMXEOr6DJR7","ES","6",0,1],["1NNHprrOH21WM1oq3-92gvqw7hxqqC2QR","ES","14",0,6.4],["19_MEZ-XHMKfU4QkHLVDXPEV7jKrfGH68","ES","45",0,3.1],["1rBh0-zVHfhSpZmEKoQo6aOT2dtEsyOEy","ES","45",0,4.7],["1l44cO7S5JAoj-0RWbCyYuIqiYA2X83Eq","ES","5",0,7.9],["1yBC302225tg-IvhiHMgVGvaGj3QgiKz5","ES","15",0,2.6],["1LPdiycOOpwv2-gd67YO9_hcI5p9U_Emq","ES","15",0,1.7],["1CaHueKqE3Eo7W-T8PplHcZq1KXtd642c","ES","05",0,1.6],["1pkATBo3s789PfZCPJkZG1hmhonJfAUu5","ES","5",0,0.4],["12jIROd5FixTtywWKW8tnP9w71kVZKyiL","ES","5",0,1.8],["17JwMwUEO1fPjhx9z6V3Qq8oU_94wcNTN","ES","013",0,4.2],["1AXzmkiEClnhYXEdNTkof32ev00CYzcpB","ES","3",0,1],["1HFDO5qLHUnJJoFyRKS2_H86wupVGeEy7","ES","3",1,6],["1VRpIKO2mjeCc_JO-WPJxxyeEAJPcC2vu","ES","3",1,0.4],["1CAu_IxSam_QcgUN14kvSNvo1bss3_GiI","ES","3",1,0.7],["1PI79uKPMKUNrNtreZIASpofDt0hv5U7h","ES","3",1,0.7],["1h2Xpwhe9JQoXF6NcHNo0YXr3zh_ROeru","ES","3",1,1.3],["1Cf9MPpy-jJ-qBrGT2aZzOtKkwUYbCpga","ES","01",0,2.8],["1dkd7cWHBi4-3fUrWLdQZwFC6zTxyHhmN","ES","1",0,8.7],["175f-1ViRagpBQQWK1wx840PuDoIY-EGg","ES","1",0,1.3],["1yIUf3WmY_RCGXSl1txCGK0Gv9tUyvskk","ES","1",0,4.9],["194stqv5Iz8DKH4b7XeOZhf-nT3wwasx-","ES","1",0,1.6],["1vm7BUTKgKNS01g948525OtOXoe_5xrQ8","ES","1",0,0.8],["13MNydj_0yWJy7dcJym9Ut_tWlhs2lL6p","ES","1",0,7.2],["1f3LhU9-mTUKneUZrBGsxosa6NHQryUb0","ES","1",1,0.6],["1klm3B27aYkpuFkIh4_4kOhK6SL-FiXmv","ES","1",1,0.5],["1UjrGbONLKj3XMREq_32RXXggl1rbDLY3","ES","1",1,4.2],["1Ie-vfNKMzkIsxW0v1f-kZiKouzhfYhcg","ES","1",1,1.8],["1MqtKGEd_gTYk4eJvQTVzq6e1r9Tk4fk8","ES","1",1,3.2],["1qQGbBiZUzBk2-6VE_9ztEFgUiUmC-Vjl","ES","1",1,1.6],["1N86g0oxwCwwXabcJtBTsAvJSy4iEOCdf","ES","1",1,0.8],["1KVW_xUHUssP4A_fbV0dKQ37lVS4lLQHp","ES","1",1,1.3],["1wwGoYQOCgMq5T6ITyPhToAebYYDdBrNs","ES","0",0,0.9],["1RZr6A62ae_T8UR2xrjrhuZ5A7VPX0Y0Q","ES","0",0,0.4],["1sdHm7IKaon0sFvsPNIMJ9YORJz-WTJJm","ES","0",0,0.7],["1p2WsgKVp63mpMlq4z-4DXpw2yNe8Kc2G","ES","0",0,0.4],["11OL6Y_HWMUhDcnX3wce6gwGmNqyiuEsI","ES","0",0,5.2],["1Hu1h5PYuYI2BJwjvOc-dZB9O3fNIKNNZ","ES","0",0,1.4],["1K42IL-Uvvw1oZqOzaS6JODggznvZvjK7","ES","0",0,1.9],["1zLaSrDSJ5G1EyeZ__FtMfskUl24dlJvg","ES","0",0,7.9]];
+
+/* ---------- state ---------- */
+const state = { ui: "en", lang: "ALL", area: 0 };
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+};
+
+const clips = CLIPS.map(([id, lang, areas, _rt, min]) => ({
+  id, lang, min, areas: areas.split("").map(Number),
+}));
+const $ = s => document.querySelector(s);
+const t = k => T[state.ui][k];
+const areaName = i => AREAS[i][state.ui];
+const areaShort = i => AREAS[i][state.ui === "en" ? "shortEn" : "shortEs"] || areaName(i);
+const mmss = m => { const s = Math.round(m * 60); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+const langName = c => (LANGS[c] || { en: c, es: c })[state.ui];
+const driveUrl = id => `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function readHash() {
+  const p = new URLSearchParams(location.hash.slice(1));
+  const a = AREAS.findIndex(x => x.slug === p.get("area"));
+  if (a >= 0) state.area = a;
+  const l = (p.get("lang") || "").toUpperCase();
+  if (l && (l === "ALL" || LANGS[l])) state.lang = l;
+  const ui = p.get("ui");
+  if (ui === "en" || ui === "es") state.ui = ui;
+}
+function writeHash() {
+  const p = new URLSearchParams();
+  p.set("area", AREAS[state.area].slug);
+  if (state.lang !== "ALL") p.set("lang", state.lang);
+  if (state.ui !== "en") p.set("ui", state.ui);
+  history.replaceState(null, "", "#" + p.toString());
+}
+
+function filtered(area) {
+  return clips.filter(c =>
+    (state.lang === "ALL" || c.lang === state.lang) &&
+    (area === undefined || c.areas.includes(area)));
+}
+
+/* ---------- render ---------- */
+function renderStatic() {
+  document.documentElement.lang = state.ui;
+  document.title = `${t("title")} · TalkAbroad`;
+  document.querySelectorAll("[data-t]").forEach(el => {
+    const v = t(el.dataset.t);
+    if (el.dataset.t === "notice") el.innerHTML = v; else el.textContent = v;
+  });
+  document.querySelectorAll(".ui-lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ui === state.ui)));
+}
+
+function renderLangs() {
+  const base = clips;
+  const counts = {};
+  base.forEach(c => counts[c.lang] = (counts[c.lang] || 0) + 1);
+  const order = Object.keys(LANGS).filter(k => counts[k]).sort((a, b) => counts[b] - counts[a]);
+  const items = [["ALL", t("all"), base.length], ...order.map(k => [k, langName(k), counts[k]])];
+  $("#langs").innerHTML = items.map(([k, label, n]) =>
+    `<button type="button" class="chip" data-lang="${k}" aria-pressed="${state.lang === k}">${esc(label)}<span class="n">${n}</span></button>`).join("");
+}
+
+function renderAreas() {
+  $("#areas").innerHTML = AREAS.map((a, i) => {
+    const n = filtered(i).length;
+    return `<li><button type="button" class="area-btn" data-area="${i}" aria-current="${state.area === i}" ${n ? "" : "disabled"}>
+      <span>${esc(areaShort(i))}</span><span class="count">${n}</span></button></li>`;
+  }).join("");
+}
+
+function renderSection() {
+  const a = AREAS[state.area];
+  $("#area-title").textContent = areaName(state.area);
+  $("#area-desc").textContent = state.ui === "en" ? a.dEn : a.dEs;
+
+  // Most focused examples first (fewest other areas), then shortest.
+  const list = filtered(state.area).sort((x, y) => x.areas.length - y.areas.length || x.min - y.min);
+  const where = state.lang === "ALL" ? "" : t("inLang")(langName(state.lang));
+  $("#area-meta").innerHTML = `<span>${esc(t("clips")(list.length) + where)}</span>`;
+
+  if (!list.length) {
+    $("#grid").innerHTML = `<li class="empty" style="grid-column:1/-1">${esc(t("empty"))}</li>`;
+    return;
+  }
+  $("#grid").innerHTML = list.map((c, i) => {
+    const others = c.areas.filter(x => x !== state.area);
+    const also = others.length
+      ? `<div class="also">${esc(t("also"))}<div class="also-list">${others.map(o =>
+          `<button type="button" class="tag" data-area="${o}">${esc(areaShort(o))}</button>`).join("")}</div></div>`
+      : `<p class="focus">${esc(t("focusOnly"))}</p>`;
+    const label = `${t("example")} ${i + 1}`;
+    return `<li class="card">
+      <div class="card-top">
+        <span class="badge badge-lang">${esc(langName(c.lang))}</span>
+        <span class="dur"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${mmss(c.min)}</span>
+      </div>
+      <h3>${esc(label)}</h3>
+      ${also}
+      <a class="btn btn-primary" href="${driveUrl(c.id)}" target="_blank" rel="noopener noreferrer"
+         aria-label="${esc(`${t("watch")}: ${label}, ${langName(c.lang)}, ${mmss(c.min)}`)}">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>${esc(t("watch"))}
+      </a>
+    </li>`;
+  }).join("");
+}
+
+function render() {
+  // Keep the selected area valid for the current filters.
+  if (!filtered(state.area).length) {
+    const first = AREAS.findIndex((_, i) => filtered(i).length);
+    if (first >= 0) state.area = first;
+  }
+  renderStatic(); renderLangs(); renderAreas(); renderSection();
+  writeHash();
+}
+
+/* ---------- events ---------- */
+document.addEventListener("click", e => {
+  const ui = e.target.closest("[data-ui]");
+  if (ui) { state.ui = ui.dataset.ui; store.set("cel-ui", state.ui); return render(); }
+  const lang = e.target.closest("[data-lang]");
+  if (lang) { state.lang = lang.dataset.lang; store.set("cel-lang", state.lang); return render(); }
+  const area = e.target.closest("[data-area]");
+  if (area && !area.disabled) {
+    state.area = Number(area.dataset.area); render();
+    if (area.classList.contains("tag") || window.innerWidth < 760) {
+      const y = $("#area-section").getBoundingClientRect().top + window.scrollY - 76; // below sticky header
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+});
+$("#copy-link").addEventListener("click", async () => {
+  writeHash();
+  try { await navigator.clipboard.writeText(location.href); }
+  catch (e) {
+    const ta = Object.assign(document.createElement("textarea"), { value: location.href });
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch (err) {}
+    ta.remove();
+  }
+  const toast = $("#toast"); toast.textContent = t("copied"); toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1600);
+});
+window.addEventListener("hashchange", () => { readHash(); render(); });
+
+/* ---------- start ---------- */
+const savedUi = store.get("cel-ui"); if (savedUi === "en" || savedUi === "es") state.ui = savedUi;
+else if ((navigator.language || "").toLowerCase().startsWith("es")) state.ui = "es";
+const savedLang = store.get("cel-lang"); if (savedLang && (savedLang === "ALL" || LANGS[savedLang])) state.lang = savedLang;
+readHash();   // a shared link always wins over saved preferences
+render();
+</script>
+</body>
+</html>
